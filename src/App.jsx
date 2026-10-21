@@ -27,7 +27,7 @@ const CARTA = [
 
 const TIMELINE = [
   { data: 'Ago 2025', titulo: 'O Primeiro Olhar', desc: 'Te vi e soube que era especial, mesmo sendo embaraçoso.', emoji: '👀' },
-  { data: 'Ago 2025', titulo: 'O Encontro', desc: 'A famosa desculpa de comprar roupas que mudou as nossas vidas.', emoji: '☕' },
+  { data: 'Ago 2025', titulo: 'O Primeiro Encontro', desc: 'A famosa desculpa de comprar roupas que mudou as nossas vidas.', emoji: '☕' },
   { data: 'Out 2025', titulo: 'O Sim', desc: 'O dia em que decidimos caminhar juntos. O dia mais feliz da minha vida.', emoji: '❤️' },
   { data: 'Dez 2025', titulo: '1º Natal', desc: 'A magia do Natal ficou perfeita e completa por ter você ao meu lado.', emoji: '🎄' },
   { data: 'Hoje', titulo: 'Aqui e Agora', desc: 'Escrevendo a nossa história, valorizando cada instante do nosso amor.', emoji: '🌹' },
