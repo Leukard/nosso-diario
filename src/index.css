@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Nunito:wght@300;400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #fdfaf6;
+  font-family: 'Nunito', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+/* Fundo Cartunesco de Caderno Mágico */
+.notebook-bg {
+  background-color: #fdfaf6;
+  background-image: 
+    linear-gradient(90deg, rgba(212, 160, 23, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(212, 160, 23, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  position: relative;
+}
+.notebook-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 40px; bottom: 0; width: 2px;
+  background-color: rgba(139, 0, 0, 0.15);
+  z-index: 0;
+}
+
+/* Linhas da Carta Mágica (Capa) */
+.magic-letter-paper {
+  background-color: #fff9f0;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(139, 0, 0, 0.15) 31px, rgba(139, 0, 0, 0.15) 32px);
+  background-size: 100% 32px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid rgba(212, 160, 23, 0.2);
+  background-position: 0 0;
+}
+
+.fantasy-border {
+  border: 3px double #d4a017;
+  outline: 1px solid rgba(212, 160, 23, 0.3);
+  outline-offset: 4px;
+}
+
+.polaroid {
+  min-width: 260px;
+  background: #fff;
+  padding: 0.75rem 0.75rem 3rem 0.75rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border: 1px solid #e0d5c1;
+  border-radius: 4px;
+}
+.washi-tape {
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+  width: 80px; height: 30px;
+  background-color: rgba(235, 220, 190, 0.95);
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.font-fantasy { font-family: 'Cinzel', serif; }
+.font-handwriting { font-family: 'Dancing Script', cursive; }
+
+/* ANIMAÇÃO DAS PÉTALAS */
+@keyframes fall {
+  0% { transform: translateY(-20vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(120vh) translateX(40px) rotate(360deg); opacity: 0; }
+}
+.petal {
+  position: fixed;
+  top: 0;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+  animation: fall linear infinite;
+  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.1));
+}
+
+/* =========================================
+   ENVELOPE 3D (FORMATO ELEGANTE E PROPORCIONAL)
+   ========================================= */
+.envelope-wrapper {
+  position: relative;
+  width: 380px;
+  max-width: 90vw;
+  height: 250px; /* Formato clássico de envelope */
+  background: #4a0d0d;
+  border-radius: 6px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(0,0,0,0.5);
+  cursor: pointer;
+  perspective: 1200px;
+  border: 1px solid #2a0505;
+  margin: 0 auto;
+}
+
+.envelope-interior { position: absolute; inset: 0; background: #2a0505; z-index: 1; border-radius: 6px; }
+
+/* Abas frontais (Z-Index 4) */
+.envelope-left { position: absolute; inset: 0; background: #4a0d0d; clip-path: polygon(0 0, 50% 50%, 0 100%); z-index: 4; pointer-events: none; border-radius: 6px 0 0 6px; }
+.envelope-right { position: absolute; inset: 0; background: #4a0d0d; clip-path: polygon(100% 0, 50% 50%, 100% 100%); z-index: 4; pointer-events: none; border-radius: 0 6px 6px 0; }
+.envelope-body { position: absolute; inset: 0; background: #5c0f0f; clip-path: polygon(0 100%, 50% 50%, 100% 100%); z-index: 4; border-bottom: 2px solid #d4a017; pointer-events: none; border-radius: 0 0 6px 6px; }
+
+/* Tampa do Envelope */
+.envelope-flap {
+  position: absolute; top: 0; left: 0; right: 0; height: 140px;
+  transform-origin: top; z-index: 5;
+  transition: transform 0.5s ease-in-out 0s, z-index 0s 0.5s;
+  display: flex; justify-content: center; align-items: flex-end;
+}
+.env-open .envelope-flap { transform: rotateX(180deg); z-index: 2; }
+.env-closing .envelope-flap { transform: rotateX(0deg); z-index: 5; transition: transform 0.5s ease-in-out 1.2s, z-index 0s 1.2s; }
+
+.flap-paper { position: absolute; inset: 0; background: #731515; clip-path: polygon(0 0, 100% 0, 50% 100%); border-top: 2px solid #d4a017; pointer-events: none; }
+
+/* Selo de Cera */
+.wax-seal { position: relative; width: 48px; height: 48px; background: radial-gradient(circle, #b30000, #4a0000); border-radius: 50%; border: 2px solid #d4a017; box-shadow: 0 5px 12px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: #d4a017; transform: translateY(24px); z-index: 6; transition: opacity 0.3s ease 0s; }
+.env-open .wax-seal { opacity: 0; }
+.env-closing .wax-seal { opacity: 1; transition: opacity 0.3s ease 1.2s; }
+
+/* A CARTA (Desenhada para encaixar e sair linda) */
+.envelope-letter {
+  position: absolute;
+  top: 15px; left: 15px; right: 15px; height: 215px; /* Tamanho proporcional curto */
+  background: #fff9f0;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(139, 0, 0, 0.1) 31px, rgba(139, 0, 0, 0.1) 32px);
+  background-size: 100% 32px;
+  border-radius: 4px;
+  z-index: 3;
+  padding: 16px 20px;
+  text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  border: 1px solid #e0d5c1;
+  overflow: hidden;
+  transform: translateY(0) scale(1);
+}
+
+/* Puxar para fora */
+.env-open .envelope-letter { animation: pullOut 1.2s forwards; animation-delay: 0.5s; }
+.env-closing .envelope-letter { animation: pushIn 1.2s forwards; }
+
+@keyframes pullOut {
+  0% { transform: translateY(0) scale(1); z-index: 3; box-shadow: 0 -2px 15px rgba(0,0,0,0.3); }
+  40% { transform: translateY(-240px) scale(1); z-index: 3; box-shadow: 0 5px 15px rgba(0,0,0,0.3); } /* Sobe limpando o bolso */
+  45% { transform: translateY(-240px) scale(1); z-index: 10; } /* Pula pra frente de tudo */
+  100% { transform: translateY(-10px) scale(1.15); z-index: 10; box-shadow: 0 25px 60px rgba(0,0,0,0.8); } /* Desce um pouco, fica majestosa */
+}
+
+@keyframes pushIn {
+  0% { transform: translateY(-10px) scale(1.15); z-index: 10; box-shadow: 0 25px 60px rgba(0,0,0,0.8); }
+  55% { transform: translateY(-240px) scale(1); z-index: 10; }
+  60% { transform: translateY(-240px) scale(1); z-index: 3; }
+  100% { transform: translateY(0) scale(1); z-index: 3; box-shadow: 0 -2px 15px rgba(0,0,0,0.3); }
+}
